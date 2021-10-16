@@ -1,0 +1,13 @@
+ModCFG
+{
+    title = ModReloader
+    author = YourName
+    modVersion = 0.1.0
+    Plugin
+    {
+        name = ModReloader
+        description = Reload Mods
+        asmpath = Addons\ModReloader\ModReloader.dll
+        order = 1
+    }
+}
