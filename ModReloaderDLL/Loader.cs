@@ -35,30 +35,36 @@ namespace CloverTech
 
         public void ReloadPartCfgs()
         {
-                LogI("Reloading mods");
-                if (PartLoader.Instance != null)
+            LogI("Reloading mods");
+            if (PartLoader.Instance != null)
+            {
+                GameObject go = ModLoader.Instance.gameObject;
+                LogI("Unloading all ABs");
+                foreach (PartInfo part in PartLoader.Instance.LoadedPartsList)
                 {
-                    GameObject go = ModLoader.Instance.gameObject;
-                    LogI($"Destroying PartLoader in {go.name}");
-                    Destroy(go.GetComponent<PartLoader>());
-                    PartLoader.Instance = null;
-                    LogI("Reiniting PartLoader");
-                    go.AddComponent<PartLoader>();
+                    LogI($"Unloading {part.name} from {part.Mod.Title}");
+                    ABLoader.UnloadAB(part.assetPath, true);
+                }
+                LogI($"Destroying PartLoader in {go.name}");
+                Destroy(go.GetComponent<PartLoader>());
+                PartLoader.Instance = null;
+                LogI("Reiniting PartLoader");
+                go.AddComponent<PartLoader>();
+            }
+            else
+            {
+                LogW("Attempting to recover from unloaded PartLoader");
+                GameObject go = GameObject.Find("loaders");
+                if (go == null)
+                {
+                    LogE("Unable to find loaders gameobject");
                 }
                 else
                 {
-                    LogW("Attempting to recover from unloaded PartLoader");
-                    GameObject go = GameObject.Find("loaders");
-                    if (go == null)
-                    {
-                        LogE("Unable to find loaders gameobject");
-                    }
-                    else
-                    {
-                        LogW("Found loaders, reinitialising PartLoader");
-                        go.AddComponent<PartLoader>();
-                    }
+                    LogW("Found loaders, reinitialising PartLoader");
+                    go.AddComponent<PartLoader>();
                 }
+            }
         }
 
         public void LogI(string message)
