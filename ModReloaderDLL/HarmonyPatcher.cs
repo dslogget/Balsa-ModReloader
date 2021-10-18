@@ -11,7 +11,7 @@ namespace CloverTech
     {
         internal static void Run()
         {
-            Debug.LogError("Init");
+            //Debug.LogError("Init");
             HarmonyContainer.DoPatches();
         }
     }
@@ -36,7 +36,7 @@ namespace CloverTech
     {
         static public bool Prefix(ConfigNode node)
         {
-            Debug.LogError("Prefix");
+            //Debug.LogError("Prefix");
             if (node.HasNode("HarmonyPlugin"))
             {
                 Debug.LogError("Changing HarmonyPlugin to Plugin");
@@ -51,10 +51,10 @@ namespace CloverTech
 
         static public void Postfix(ConfigNode node)
         {
-            Debug.LogError("Postfix");
+            //Debug.LogError("Postfix");
             if (node.HasNode("HarmonyPlugin"))
             {
-                Debug.LogError("This never got updated so");
+                //Debug.LogError("This never got updated so");
             }
         }
 
