@@ -42,8 +42,8 @@ namespace CloverTech
                 LogI("Unloading all ABs");
                 foreach (PartInfo part in PartLoader.Instance.LoadedPartsList)
                 {
-                    LogI($"Unloading {part.name} from {part.Mod.Title}");
-                    ABLoader.UnloadAB(part.assetPath, true);
+                    LogI($"Unloading {Application.dataPath + "/../" + part.fobPath} from {part.Mod.Title}");
+                    ABLoader.UnloadAB(Application.dataPath + "/../" + part.fobPath, true);
                 }
                 LogI($"Destroying PartLoader in {go.name}");
                 Destroy(go.GetComponent<PartLoader>());
