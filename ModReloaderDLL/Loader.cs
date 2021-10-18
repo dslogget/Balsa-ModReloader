@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using BalsaCore;
 using IO;
+using UI;
+using UI.MMX.Data;
 
 
 namespace CloverTech
@@ -11,6 +13,8 @@ namespace CloverTech
         public void Start()
         {
             DontDestroyOnLoad(this);
+            LogE("Test");
+            ModLoader.Instance.ForceReloadAllModData();
         }
 
         public void Update()
@@ -90,17 +94,6 @@ namespace CloverTech
             }
         }
 
-        [BalsaAddonInit(invokeTime = AddonInvokeTime.Flight)]
-        public static void BalsaInitFlight()
-        {
-
-        }
-
-        [BalsaAddonFinalize(invokeTime = AddonInvokeTime.Flight)]
-        public static void BalsaFinalizeFlight()
-        {
-
-        }
         //Game exit
         [BalsaAddonFinalize]
         public static void BalsaFinalize()

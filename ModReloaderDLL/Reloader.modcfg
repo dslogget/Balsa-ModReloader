@@ -5,9 +5,16 @@ ModCFG
     modVersion = 0.1.0
     Plugin
     {
+        name = Harmony
+        description = Reload Mods
+        asmpath = Addons\ModReloader\0Harmony.dll
+        order = 1
+    }
+    Plugin
+    {
         name = ModReloader
         description = Reload Mods
         asmpath = Addons\ModReloader\ModReloader.dll
-        order = 1
+        order = 2
     }
 }

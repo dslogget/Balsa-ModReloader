@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\InjectModuleInitializer.2.0.3\build\InjectModuleInitializer.props" Condition="Exists('..\packages\InjectModuleInitializer.2.0.3\build\InjectModuleInitializer.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7A123D7E-8C15-458A-90AD-A746FC0046C2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CloverTech</RootNamespace>
+    <AssemblyName>ModReloader</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\ModReloader\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\External\Harmony\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\External\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\External\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Balsa.Core">
+      <HintPath>..\External\Managed\Balsa.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="com.unity.multiplayer-hlapi.Runtime">
+      <HintPath>..\External\Managed\com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FloatingUtil">
+      <HintPath>..\External\Managed\FloatingUtil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\External\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\External\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HarmonyPatcher.cs" />
+    <Compile Include="Loader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Reloader.modcfg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Target Name="RemoveUnneededFiles" AfterTargets="InjectModuleInitializer">
+    <Delete Files="$(OutDir)0Harmony.xml" />
+    <Delete Files="$(OutDir)Balsa.Core.dll" />
+    <Delete Files="$(OutDir)FMODUnity.dll" />
+    <Delete Files="$(OutDir)NaughtyAttributes.Core.dll" />
+    <Delete Files="$(OutDir)uGif.dll" />
+    <Delete Files="$(OutDir)FloatingUtil.dll" />
+    <Delete Files="$(OutDir)Unity.Timeline.dll" />
+    <Delete Files="$(OutDir)UnityEngine.AnimationModule.dll" />
+    <Delete Files="$(OutDir)UnityEngine.AssetBundleModule.dll" />
+    <Delete Files="$(OutDir)UnityEngine.AudioModule.dll" />
+    <Delete Files="$(OutDir)UnityEngine.DirectorModule.dll" />
+    <Delete Files="$(OutDir)UnityEngine.ImageConversionModule.dll" />
+    <Delete Files="$(OutDir)UnityEngine.IMGUIModule.dll" />
+    <Delete Files="$(OutDir)UnityEngine.InputLegacyModule.dll" />
+    <Delete Files="$(OutDir)UnityEngine.ParticleSystemModule.dll" />
+    <Delete Files="$(OutDir)UnityEngine.Physics2DModule.dll" />
+    <Delete Files="$(OutDir)UnityEngine.PhysicsModule.dll" />
+    <Delete Files="$(OutDir)UnityEngine.SharedInternalsModule.dll" />
+    <Delete Files="$(OutDir)UnityEngine.TextRenderingModule.dll" />
+    <Delete Files="$(OutDir)UnityEngine.UI.dll" />
+    <Delete Files="$(OutDir)UnityEngine.UIModule.dll" />
+    <Delete Files="$(OutDir)UnityEngine.UnityWebRequestAssetBundleModule.dll" />
+    <Delete Files="$(OutDir)UnityEngine.UnityWebRequestModule.dll" />
+    <Delete Files="$(OutDir)UnityEngine.UnityWebRequestTextureModule.dll" />
+    <Delete Files="$(OutDir)UnityEngine.UnityWebRequestWWWModule.dll" />
+  </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\InjectModuleInitializer.2.0.3\build\InjectModuleInitializer.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\InjectModuleInitializer.2.0.3\build\InjectModuleInitializer.props'))" />
+    <Error Condition="!Exists('..\packages\InjectModuleInitializer.2.0.3\build\InjectModuleInitializer.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\InjectModuleInitializer.2.0.3\build\InjectModuleInitializer.targets'))" />
+  </Target>
+  <Import Project="..\packages\InjectModuleInitializer.2.0.3\build\InjectModuleInitializer.targets" Condition="Exists('..\packages\InjectModuleInitializer.2.0.3\build\InjectModuleInitializer.targets')" />
+</Project>
