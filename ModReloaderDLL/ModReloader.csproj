@@ -34,6 +34,7 @@
     <Reference Include="0Harmony, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External\Harmony\0Harmony.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\External\Managed\Assembly-CSharp.dll</HintPath>
@@ -45,7 +46,7 @@
     </Reference>
     <Reference Include="Balsa.Core">
       <HintPath>..\External\Managed\Balsa.Core.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
       <HintPath>..\External\Managed\com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
