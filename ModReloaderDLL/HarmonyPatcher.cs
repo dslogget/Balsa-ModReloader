@@ -16,39 +16,10 @@ namespace CloverTech
 
         public static void DoPatches()
         {
+#if DEBUG
             Harmony.DEBUG = true;
+#endif
             harmony.PatchAll();
         }
     }
-
-    //[HarmonyPatch(typeof(AssemblyLoader))]
-    //[HarmonyPatch("LoadAssemblies")]
-    //class AssemblyLoaderPatch
-    //{
-    //    public static void Postfix(AssemblyLoader __instance)
-    //    {
-    //        // Dedupe AddonTypes by loaded assemblies
-    //        int removed = AssemblyLoader.AddonTypes.RemoveAll((Type t) =>
-    //       {
-    //           return __instance.LoadedAssemblies.Any((PluginAssembly plugAsm) => {
-    //               List<Type> foundTypes = plugAsm.asm.GetTypes().ToList().FindAll((Type asmType) => { return asmType.FullName == t.FullName; });
-    //               if (foundTypes.Count > 0)
-    //               {
-    //                   Debug.LogError($"Found: {foundTypes.Count} {t.FullName}s");
-    //                   Debug.LogError($"Found: {t.Assembly} {plugAsm.asm}s");
-    //               }
-
-
-    //               bool result = (foundTypes.Count > 0 && t.Assembly != plugAsm.asm);
-    //               if (result)
-    //               {
-    //                   Debug.LogError($"Deduped: {t.FullName} from {plugAsm.asm.GetName().FullName}"); 
-    //               }
-    //               return result;
-    //           });
-    //       });
-    //    }
-    //}
-
-
 }
