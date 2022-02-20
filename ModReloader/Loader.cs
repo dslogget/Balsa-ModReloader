@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 using BalsaCore;
 using IO;
-
+using UI;
+using UI.MMX.Data;
+using System.Collections.Generic;
+using System.Reflection;
+using System;
+using System.IO;
 
 namespace CloverTech
 {
@@ -11,6 +16,9 @@ namespace CloverTech
         public void Start()
         {
             DontDestroyOnLoad(this);
+            LogW("Test");
+            Debug.LogError("Init");
+            HarmonyContainer.DoPatches();
         }
 
         public void Update()
