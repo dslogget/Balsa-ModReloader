@@ -17,7 +17,9 @@ namespace CloverTech
         {
             DontDestroyOnLoad(this);
             LogW("Test");
+#if DEBUG
             Debug.LogError("Init");
+#endif
             HarmonyContainer.DoPatches();
         }
 
